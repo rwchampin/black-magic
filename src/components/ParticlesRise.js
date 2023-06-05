@@ -11,17 +11,9 @@ import {
   MeshDistortMaterial
 } from "@react-three/drei";
 
-const PostProcessing = dynamic(
-    () =>
-      import('@react-three/postprocessing').then(mod => ({
-        default: mod,
-      })),
-    {
-      ssr: false,
-    }
-  );
+ 
 
-  const { EffectComposer, DepthOfField, Bloom, Noise, Vignette } = PostProcessing;
+
 function MainSphere({ material }) {
   const main = useRef();
   // main sphere rotates following the mouse position
@@ -120,11 +112,11 @@ function Scene() {
 
 export const ParticlesRise = () => {
     const [isReady, setIsReady] = useState(false);
-    useEffect(() => {
-        if(EffectComposer && DepthOfField && Bloom && Noise && Vignette) {
-            setIsReady(true);
-        }
-    }, [EffectComposer, DepthOfField, Bloom, Noise, Vignette]);
+    // useEffect(() => {
+    //     if(EffectComposer && DepthOfField && Bloom && Noise && Vignette) {
+    //         setIsReady(true);
+    //     }
+    // }, [EffectComposer, DepthOfField, Bloom, Noise, Vignette]);
     if(!isReady) {
         return null;
     }
@@ -145,7 +137,7 @@ export const ParticlesRise = () => {
       <Suspense fallback={<Html center>Loading.</Html>}>
         <Scene />
       </Suspense>
-      <EffectComposer multisampling={0} disableNormalPass={true}>
+      {/* <EffectComposer multisampling={0} disableNormalPass={true}>
         <DepthOfField
           focusDistance={0}
           focalLength={0.02}
@@ -157,10 +149,10 @@ export const ParticlesRise = () => {
           luminanceSmoothing={0.9}
           height={300}
           opacity={3}
-        />
-        <Noise opacity={0.025} />
-        <Vignette eskil={false} offset={0.1} darkness={1.1} />
-      </EffectComposer>
+        /> */}
+        {/* <Noise opacity={0.025} /> */}
+        {/* <Vignette eskil={false} offset={0.1} darkness={1.1} />
+      </EffectComposer> */}
     
     </Canvas>
   );

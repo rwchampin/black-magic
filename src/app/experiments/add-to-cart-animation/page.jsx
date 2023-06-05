@@ -1,4 +1,5 @@
 "use client";
+import { Image } from 'next/image'
 export default function Page(){
 
     return (
@@ -55,20 +56,20 @@ export default function Page(){
                 <div className="left-col">
                     <div className="thumbs">
                     <a className="thumb-image active" href="//cdn.shopify.com/s/files/1/1047/6452/products/product_1024x1024.png?v=1446769025" data-index="0">
-                        <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/product_150x150.png?v=1446769025" alt="Tommy Hilfiger T-Shirt New York" /></span>
+                        <span><Image fill src="//cdn.shopify.com/s/files/1/1047/6452/products/product_150x150.png?v=1446769025" alt="Tommy Hilfiger T-Shirt New York" /></span>
                     </a>
                     <a className="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179" data-index="1">
-                        <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_150x150.jpg?v=1447104179" alt="Tommy Hilfiger T-Shirt New York"/></span>
+                        <span><Image fill src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_150x150.jpg?v=1447104179" alt="Tommy Hilfiger T-Shirt New York"/></span>
                     </a>
                     <a className="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180" data-index="2">
-                        <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_150x150.jpg?v=1447104180" alt="Tommy Hilfiger T-Shirt New York"/></span>
+                        <span><Image fill src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_150x150.jpg?v=1447104180" alt="Tommy Hilfiger T-Shirt New York"/></span>
                     </a>
                     <a className="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182" data-index="3">
-                        <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_150x150.jpg?v=1447104182" alt="Tommy Hilfiger T-Shirt New York"/></span>
+                        <span><Image fill src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_150x150.jpg?v=1447104182" alt="Tommy Hilfiger T-Shirt New York"/></span>
                     </a>
                     </div>
                     <div className="big">
-                    <span id="big-image" className="img" quickbeam="image" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/product_1024x1024.png?v=1446769025')" }} data-src="//cdn.shopify.com/s/files/1/1047/6452/products/product_1024x1024.png?v=1446769025"></span>
+                    <span id="big-image" className="Image fill" quickbeam="image" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/product_1024x1024.png?v=1446769025')" }} data-src="//cdn.shopify.com/s/files/1/1047/6452/products/product_1024x1024.png?v=1446769025"></span>
                     <div id="banner-gallery" className="swipe">
                         <div className="swipe-wrap">
                         <div style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/product_large.png?v=1446769025')" }}></div>
@@ -104,28 +105,28 @@ export default function Page(){
                             <input id="swatch-0-m" type="radio" name="option-0" value="M" checked  />
                             <label for="swatch-0-m">
                             M
-                            <img className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                            <Image fill className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                             </label>
                         </div>
                         <div data-value="L" className="swatch-element plain l available">
                             <input id="swatch-0-l" type="radio" name="option-0" value="L"  />
                             <label for="swatch-0-l">
                             L
-                            <img className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                            <Image fill className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                             </label>
                         </div>
                         <div data-value="XL" className="swatch-element plain xl available">
                             <input id="swatch-0-xl" type="radio" name="option-0" value="XL"  />
                             <label for="swatch-0-xl">
                             XL
-                            <img className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                            <Image fill className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                             </label>
                         </div>
                         <div data-value="XXL" className="swatch-element plain xxl available">
                             <input id="swatch-0-xxl" type="radio" name="option-0" value="XXL"  />
                             <label for="swatch-0-xxl">
                             XXL
-                            <img className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                            <Image fill className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                             </label>
                         </div>
                         </div>
@@ -135,7 +136,7 @@ export default function Page(){
                             <div className="tooltip">Blue</div>
                             <input quickbeam="color" id="swatch-1-blue" type="radio" name="option-1" value="Blue" checked  />
                             <label for="swatch-1-blue" style={{borderColor: "blue"}}>
-                            <img className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                            <Image fill className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                             <span style={{backgroundColor: "blue"}}></span>
                             </label>
                         </div>
@@ -143,7 +144,7 @@ export default function Page(){
                             <div className="tooltip">Red</div>
                             <input quickbeam="color" id="swatch-1-red" type="radio" name="option-1" value="Red"  />
                             <label for="swatch-1-red" style={{borderColor: "red"}}>
-                            <img className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                            <Image fill className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                             <span style={{backgroundColor: "red"}}></span>
                             </label>
                         </div>
@@ -151,7 +152,7 @@ export default function Page(){
                             <div className="tooltip">Yellow</div>
                             <input quickbeam="color" id="swatch-1-yellow" type="radio" name="option-1" value="Yellow"  />
                             <label for="swatch-1-yellow" style={{borderColor: "yellow"}}>
-                            <img className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                            <Image fill className="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
                             <span style={{backgroundColor: "yellow"}}></span>
                             </label>
                         </div>
@@ -233,7 +234,7 @@ export default function Page(){
         <h2>You might also like</h2>
         <div className="collection-list cols-4" id="collection-list" data-products-per-page="4">
           <a className="product-box">
-            <span className="img">
+            <span className="Image fill">
               <span style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_70d2887b-ec6a-4bcb-a93b-7fd1783e6445_grande.jpg?v=1447530130')" }} className="i first"></span>
               <span className="i second" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/product_030f9fc5-f253-4dca-a43a-fe2b719d0704_grande.png?v=1447530130')" }}></span>
             </span>
@@ -272,7 +273,7 @@ export default function Page(){
             </span>
           </a>
           <a className="product-box">
-            <span className="img">
+            <span className="Image fill">
               <span style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_357767df-d7ff-4b58-b705-edde76bb32b7_grande.jpg?v=1447530150')" }} className="i first"></span>
               <span className="i second" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_613d5776-ea61-4f9b-abef-0ce847c63a67_grande.jpg?v=1447530150')" }}></span>
             </span>
@@ -311,7 +312,7 @@ export default function Page(){
             </span>
           </a>
           <a href="/collections/men/products/copy-of-copy-of-copy-of-tommy-hilfiger-t-shirt-new-york-4" className="product-box">
-            <span className="img">
+            <span className="Image fill">
               <span style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_0e98498a-123c-4305-9d94-d8280bb46416_grande.jpg?v=1447530164')" }} className="i first"></span>
               <span className="i second" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_6c949188-dba0-4789-9434-c0821b92f3f4_grande.jpg?v=1447530164')" }}></span>
             </span>
@@ -350,7 +351,7 @@ export default function Page(){
             </span>
           </a>
           <a className="product-box">
-            <span className="img">
+            <span className="Image fill">
               <span style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/product_7d606126-1b60-4738-99b3-062810f2db8b_grande.png?v=1447530674')" }} className="i first"></span>
               <span className="i second" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_fd08d231-654c-4304-81b2-9191e6fd141e_grande.jpg?v=1447530674')" }}></span>
             </span>
@@ -389,7 +390,7 @@ export default function Page(){
             </span>
           </a>
           <a className="product-box hidden">
-            <span className="img">
+            <span className="Image fill">
               <span style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_bba77d82-7f85-47af-9a45-f4700bcc04ad_grande.jpg?v=1447530689')" }} className="i first"></span>
               <span className="i second" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/product_f065e961-d296-48a8-8a67-a3532200e257_grande.png?v=1447530689')" }}></span>
             </span>
@@ -428,7 +429,7 @@ export default function Page(){
             </span>
           </a>
           <a className="product-box hidden">
-            <span className="img">
+            <span className="Image fill">
               <span style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_bf59c7f2-7c1f-4822-9494-6a984598a56c_grande.jpg?v=1447530706')" }} className="i first"></span>
               <span className="i second" style={{backgroundImage: "url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_c6fa0fc1-99a0-4bd0-a1d8-0270127977fc_grande.jpg?v=1447530706')" }}></span>
             </span>

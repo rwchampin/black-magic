@@ -46,7 +46,7 @@ export default function Page() {
     throw new Error("chatLog is not defined");
   };
 
-  const createMessageInstance = ({ prompt }: Prompt) => {
+  const createMessageInstance = useCallback(({ prompt }: Prompt) => {
     getChatLog().innerHTML += `
         <div className="message-instance-container">
         <div className="message user-messsage">
@@ -65,7 +65,7 @@ export default function Page() {
         </div>
     </div>
         `;
-  };
+  }, []);
 
   const askChatGPT = async ({ prompt }: Prompt) => {
     return fetch(`${process.env.CHAT_GPT_API_URL}`, {
@@ -94,22 +94,22 @@ export default function Page() {
       });
   };
   // scrolls to bottom of chat log
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     getChatLog().scrollTop = getChatLog().scrollHeight;
-  };
+  }, []);
 
   useEffect(() => {
     getForm().addEventListener("submit", (e) => {
       e.preventDefault();
       const prompt = getPromptInput().value;
       if (prompt !== "") {
-        createMessageInstance({prompt});
-        askChatGPT({prompt});
+        createMessageInstance({ prompt });
+        askChatGPT({ prompt });
         handleScroll();
         getPromptInput().value = "";
       }
     });
-  }, []);
+  }, [handleScroll, createMessageInstance]);
 
   return (
     <div className="chat-container">
