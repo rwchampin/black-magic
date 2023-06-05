@@ -1,0 +1,243 @@
+"use client";
+import React, { useEffect, useState , useRef} from 'react';
+
+export const Cursor = (props) => {
+    const $el = useRef(null);
+    const $i = useRef(null);
+    const $c = useRef(null);
+    const [x, setX] = useState(0);
+    const [y, setY] = useState(0);
+    const [lx, setLx] = useState(0);
+    const [ly, setLy] = useState(0);
+    const [dx, setDx] = useState(0);
+    const [dy, setDy] = useState(0);
+    const [vx, setVx] = useState(0);
+    const [vy, setVy] = useState(0);
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+    const [cursor, setCursor] = useState('crosshair');
+    const [radius, setRadius] = useState(80);
+    const [borderWidth, setBorderWidth] = useState(3);
+    const [color,] = useState('#49D292');
+    const [opacity, setOpacity] = useState(0.85);
+    const [ease, setEase] = useState(0.2);
+    const [lockTriggers, setLockTriggers] = useState('[data-lock], a, button');
+    const [lockColor, setLockColor] = useState('#E8F79A');
+    const [lockOpacity, setLockOpacity] = useState(0.99);
+    const [lockClass, setLockClass] = useState(null);
+    const [lockTravel, setLockTravel] = useState(0.15);
+    const [lockExpand, setLockExpand] = useState(20);
+    const [lockEase, setLockEase] = useState(0.3);
+    const [content, setContent] = useState('+');
+    const [useCSSVars, setUseCSSVars] = useState(true);
+
+    useEffect(() => {
+        init();
+        return () => {
+            destroy();
+        };
+    }, []);
+
+    const init = () => {
+        
+
+        
+
+
+    };
+
+const events = (remove) => {
+
+    const action = remove ? 'removeEventListener' : 'addEventListener';
+
+
+    window[action]('mousedown', onDown);
+    window[action]('mouseup', onUp);
+    window[action]('mousemove', onMove);
+    window[action]('touchstart', onDown);
+    window[action]('touchend', onUp);
+    window[action]('touchmove', onMove);
+    window[action]('mouseover', onHover);
+    window[action]('mouseout', onHover);
+};
+
+
+        
+    const attach = () => {
+        events();
+        document.body.appendChild($);
+    };
+
+    const destroy = () => {
+        events(true);
+        document.body.removeChild($);
+    };
+
+    const setColor = (color, opacity) => {
+        $.style.color = color;
+        $.style.opacity = opacity;
+    };
+
+    const onDown = () => {
+        setDown(true);
+    };
+
+    const onUp = () => {
+        setDown(false);
+    };
+
+    const onMove = (e) => {
+        e = e.touches ? e.touches[0] : e;
+        setX(e.clientX);
+        setY(e.clientY);
+        onHover(e);
+    };
+
+    const onHover = (e) => {
+        if (lockTriggers) {
+            let t = e.target;
+            if (t !== lockTarget) {
+                while (t !== document.documentElement && t.parentNode) {
+                    if (matches(t, lockTriggers)) {
+                        lock(t);
+                        return;
+                    }
+                    t = t.parentNode;
+                }
+                if (lockTarget) {
+                    unlock();
+                }
+                setLockTarget(null);
+            }
+        }
+    };
+
+    const lock = (x, y, w, h) => {
+        if (x !== undefined) {
+            setLocked(true);
+            setColor(lockColor, lockOpacity);
+            if (lockClass) {
+                $.classList.add(lockClass);
+            }
+            if (y == undefined && x.getBoundingClientRect) {
+                setLockTarget(x);
+                const rect = x.getBoundingClientRect();
+                w = Math.round(rect.right - rect.left);
+                h = Math.round(rect.bottom - rect.top);
+                x = rect.left + w / 2;
+                y = rect.top + h / 2;
+                setDown(false);
+            }
+            setLockX(x);
+            setLockY(y);
+            if (lockExpand !== false) {
+                setLockWidth(w + lockExpand);
+                setLockHeight(h + lockExpand);
+            }
+            return;
+        }
+        unlock();
+    };
+
+    const unlock = () => {
+        if (locked) {
+            if (lockClass) {
+                $.classList.remove(lockClass);
+            }
+            setLx(x);
+            setLy(y);
+            setColor(color, opacity);
+        }
+        setLockWidth(0);
+        setLockHeight(0);
+        setLockX(0);
+        setLockY(0);
+        setRotation(0);
+        setLocked(false);
+    };
+
+    const update = () => {
+        requestAnimationFrame(update);
+
+        let tx = x;
+        let ty = y;
+        let w, h, now, dt, dx, dy;
+
+        if (locked && lockx && locky) {
+            tx = lockx - (lockx - tx) * lockTravel;
+            ty = locky - (locky - ty) * lockTravel;
+        }
+
+        setX(ease(x, tx, ease));
+        setY(ease(y, ty, ease));
+
+        if (locked) {
+            setRotation(0);
+            dx = 0;
+            dy = 0;
+        } else {
+            dx = x - lx;
+            dy = y - ly;
+        }
+
+        setDx(Math.floor(ease(dx, dx, ease) * 100) / 100);
+        setDy(Math.floor(ease(dy, dy, ease) * 100) / 100);
+
+        now = Date.now();
+        dt = now - timestamp;
+        setTimestamp(now);
+        setVx(Math.min(Math.abs(dx) / dt, 2));
+        setVy(Math.min(Math.abs(dy) / dt, 2));
+
+        setRotation(locked ? 0 : Math.atan2(dy, dx));
+
+        w = lockWidth ? lockWidth : radius;
+        h = lockHeight ? lockHeight : radius;
+        if (down) {
+            w -= 10;
+            h -= 10;
+        }
+
+        setWidth(Math.round(ease(width, w, lockEase) * 10) / 10);
+        setHeight(Math.round(ease(height, h, lockEase) * 10) / 10);
+
+        setLx(x);
+        setLy(y);
+
+        onUpdate();
+    };
+
+    const updateStyle = () => {
+        $.style.transform = `translate3d(${x + dx * -1}px, ${y + dy * -1} px, 0px)`;
+        $c.style.transform = `translate3d(-50 %, -50 %, 0px) translate(${vx * - 4}%, ${vy * - 4}%) rotate(${rotation}rad) scaleX(${vx / 2 + vy / 2 + 1})`;
+        $i.style.transform = `translate(-50 %, -50 %) rotate(${-rotation}rad)`;
+        $c.style.width = `${width} px`;
+        $c.style.height = `${height} px`;
+    };
+
+    const onUpdate = () => {
+        if (useCSSVars) {
+            $.style.setProperty('--x', x + 'px');
+            $.style.setProperty('--y', y + 'px');
+            $.style.setProperty('--dx', dx + 'px');
+            $.style.setProperty('--dy', dy + 'px');
+            $.style.setProperty('--vx', vx + 'px');
+            $.style.setProperty('--vy', vy + 'px');
+            $.style.setProperty('--width', width + 'px');
+            $.style.setProperty('--height', height + 'px');
+            $.style.setProperty('--radius', radius + 'px');
+            $.style.setProperty('--borderWidth', borderWidth + 'px');
+            $.style.setProperty('--color', color);
+            $.style.setProperty('--opacity', opacity);
+            $.style.setProperty('--rotation', rotation + 'rad');
+            $.style.setProperty('--lockWidth', lockWidth + 'px');
+            $.style.setProperty('--lockHeight', lockHeight + 'px');
+        }
+    }
+
+
+    return <div />;
+};
+
+
+

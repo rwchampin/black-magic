@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --color-primary: #222;
+    --color-primary-rgb: 34, 34, 34;
+    --color-link: #222;
+    --color-white: #fff;
+    --color-white-rgb: 255, 255, 255;
+    --color-orange: #FA5D29;
+    --color-errors: #FA5D29;
+    --color-featured: #f8f0ee;
+    --color-underlined: var(--color-primary-rgb);
+    --color-connect: #FF602C;
+    --color-connect-2: #FFAE94;
+    --color-connect-3: #FFC5B1;
+    --color-inspire: #AAEEC4;
+    --color-inspire-2: #C8E4D3;
+    --color-inspire-3: #E2F4E9;
+    --color-awards: #502bd8;
+    --color-awards-2: #6749d1;
+    --color-awards-3: #917eda;
+    --color-read: #c0ab3c;
+    --color-read-2: #CDC38B;
+    --color-read-3: #DBD6C0;
+    --color-learn: #FFF083;
+    --color-learn-2: #FFF9D0;
+    --color-learn-3: #fffbe2;
+    --color-jobs: #74bcff;
+    --color-jobs-2: #99ccfc;
+    --color-jobs-3: #b4d7f8;
+    --text-size-small: 12px;
+    --text-size-primary: 16px;
+    --text-size-medium: 18px;
+    --text-size-large: 24px;
+    --border-gray: #e9e9e9;
+    --color-dotteds-rgb: 34, 34, 34;
+    --bg-primary: #F8F8F8;
+    --bg-primary-rgb: 248, 248, 248;
+    --bg-secondary: #222;
+    --bg-3rd: #e9e9e9;
+    --bg-4rd: #f3f3f3;
+    --bg-white: white;
+    --header-height: 71px;
+    --gutter: 20px;
+    --pad-inner: 52px;
+    --color-odd-rows: #f3f3f3;
+    --avatar-bg: #F8F8F8;
+    --border-table: #222;
+    --alert-green: #e0f4d9;
+    --alert-green-rgb: 224, 244, 217;
+    --alert-yellow: #FFF083;
+    --alert-yellow-rgb: 255, 240, 131;
+    --rounded-small: 4px;
+    --rounded-normal: 8px;
+    --rounded-large: 1rem;
+    --img-resizing-site: 16 / 12;
+    --img-resizing-paronamic: 2 / 1;
+    --img-resizing-desktop: 19 / 10;
+    --button-rounded: 8px; 
+    --button-rounded-full: 72px; 
+    --button-height: 48px; 
+    --button-pad: 24px;
+    --button-bg: var(--color-primary);
+    --button-color: var(--color-white);
+    --button-color-border: var(--bg-primary);
+}
+
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+body {
+    margin: auto;
+    font-size: var(--text-size-primary);
+    font-weight: 300;
+    background: var(--bg-primary);
+    color: var(--color-primary);
+    line-height: 200%;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+.page {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+}
+canvas  {
+height: 100vh !important;
+width: 100vw !important;
+position: fixed;
+top: 0;
+left: 0;
+z-index: -1;
+background: transparent;
+}
+nav {
+  background: var(--bg-secondary);
+  cursor: move !important;
+}
+ 
+nav li a {
+  color: #d3d3d3;
+}
+.stage {
+    position: relative;
+  height: 100vh;
+  width: 100vw;
+  margin: 0 auto;
+
+  text-align: center;
+}
+.txt{
+  text-align: center;
+  will-change: font-weight, font-stretch, transform;
+  color: black !important;
+  font-family: 'Heavenly';
+  position: absolute;
+  font-weight: 600;
+  text-shadow: -2px 2px 2px red;
+  line-height: 1 !important;
+  transform: rotate(-20deg);
+}
+.ryan {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0) rotate(-25deg);
+}
+.the {
+  top: 32%;
+  left: 57%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+}
+.dev {
+  top: 63%;
+  left: 61%;
+  transform: translate(-50%, -100%) rotate(-25deg);
+}
+a {
+  color: var(--color-link);
+}
+
+button {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--button-height);
+    padding: 0 var(--button-pad);
+    background-color: var(--button-bg);
+    font-size: var(--text-size-primary);
+    color: var(--button-color);
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+    transition: color .3s,background .3s,border .3s;
+}
+
+.switch {
+  display: block;
+cursor: pointer;
+filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) drop-shadow(0 4px 24px rgba(0, 0, 0, 0.4));
+}
+
+.switch input {
+  display: none;
+}
+
+.switch canvas {
+  display: block;
+margin: -16px -26px;
+}
