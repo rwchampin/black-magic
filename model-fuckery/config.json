@@ -1,0 +1,4 @@
+{
+  "sourceDir": "../src/models/raw",
+  "outputDir": "../src/models/dist"
+}
