@@ -4,7 +4,7 @@ import { Vector2 } from 'three'
  * Pointer helper
  * @author Kevin Levron <kevin.levron@gmail.com>
  */
-export default function (params) {
+export default function Pointer(params) {
   const {
     domElement,
     onClick = () => {},

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useMemo } from 'react'
 import gsap from 'gsap'
 import * as THREE from 'three'
 import Image from 'next/image'
@@ -10,7 +10,7 @@ export const ParticleLogo = () => {
     const animate = useRef();
 
 
-    const mouse = new THREE.Vector2();
+    const mouse = useMemo(() => new THREE.Vector2(), [])
     const init = () => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
@@ -408,7 +408,7 @@ export const ParticleLogo = () => {
             // gsap.ticker.remove(animate.current)
             // window.removeEventListener('mousemove', onMove)
         }
-    }, [])
+    }, [ mouse ])
 
     return (
         <>

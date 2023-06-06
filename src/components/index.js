@@ -1,7 +1,7 @@
 import { Button } from './Button';
 import CustomCursor from './CustomCursor';
 import { JellyLogo } from './JellyLogo';
-// import { Navigation } from './Navigation';
+
 import { Title } from './Title';
 import { Logo } from './Logo';
 import { CanvasManager } from './CanvasManager';
@@ -22,7 +22,7 @@ export {
     Button,
     CustomCursor,
     JellyLogo,
-    // Navigation,
+
     ToTop,
     CanvasManager
 };

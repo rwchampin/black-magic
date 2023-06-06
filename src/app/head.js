@@ -9,6 +9,7 @@ export const Head = () => {
     return (
 
         <head>
+            <script type="module" async src="/three.js"></script>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <title>Jelly</title>
             <meta name="description" content="Jelly is a creative studio based in London." />

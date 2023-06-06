@@ -16,24 +16,15 @@ import { useParams } from 'next/navigation';
  
 
 
-export default async function Page(props) {
-    const { slug } = useParams();
+export default function Page() {
+    // const { slug } = useParams();
      
       // sk7FHuU91cKCBFbEpCzfsGm7kw8JllJJzTpE6jcNUA0ZHJR9jablZ8YaaUk0bKfC38ArRUQDs8qACVkanJHzGpDGHPBYUztAZxTSZYVaLE1DPspRaCclRHKS0Jyt4IshNUtHl2bXFc2vmQleH3rz6moViaQI8gko8IyD3CWtMcjrjJVJHSBf
  
-      const posts  = await client.fetch(`*[_type == "post"]`);
-        console.log(posts)
+      // const posts  = await client.fetch(`*[_type == "post"]`);
+        // console.log(posts)
     return (
-        <div>
-            {/* {posts.map((post) => (
-                <div key={post._id}>
-                    <h2>{post.title}</h2>
-                    <p>{post.body}</p>
-                    </div>
-            ))} */}
-
-            
-        </div>
+        <div />
     );
                     
 

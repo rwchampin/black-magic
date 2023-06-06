@@ -205,7 +205,7 @@ export const Toggle = () => {
 
             return light
         }
-    }, [])
+    }, [ isToggled.value])
 
 
 

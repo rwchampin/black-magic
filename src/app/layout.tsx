@@ -1,15 +1,43 @@
+"use client";
+import { useEffect } from "react";
 import "./globals.css";
-import { Head } from "./head";
+
+import { Canvas } from "@react-three/fiber";
 import { SafeArea } from "@/components";
 import localFont from "next/font/local";
 
-// Font files can be colocated inside of `app`
+
 
 const apercu = localFont({
   src: '/apercu-regular-pro.woff2',
-  display: "swap",
   variable: "--font-apercu",
+  preload: true,
+  weight: 'normal'
 });
+
+const apercuMedium = localFont({
+  src: '/apercu-medium-pro.woff2',
+  variable: "--font-apercu-medium",
+  preload: true,
+  weight: 'normal'
+});
+
+const apercuBold = localFont({
+  src: '/apercu-bold-pro.woff2',
+  variable: "--font-apercu-bold",
+  preload: true,
+  weight: 'normal'
+});
+
+const montserat = localFont({
+  src: '/Montserrat.ttf',
+  variable: "--font-montserrat",
+  preload: true,
+  weight: "100 900"
+});
+
+
+
 
 export default function RootLayout({
   children,
@@ -18,9 +46,12 @@ export default function RootLayout({
 }) {
   return (
     <html className="antialiased" lang="en">
-      <Head />
+      <head>
+        <meta charSet="utf-8" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        </head>
       <body className={`antialiased`}>
-        <SafeArea>{children}</SafeArea>
+        <SafeArea><Canvas camera={{ position: [0, 0, 0], fov: 65 }} >{children}</Canvas></SafeArea>
       </body>
     </html>
   );

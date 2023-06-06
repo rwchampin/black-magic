@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useMemo, useCallback } from "react";
 import { useCanvas } from "../hooks";
 import { ErrorParticle } from "@/particles/ErrorParticle";
 import "../styles/error.css";
@@ -14,7 +14,7 @@ export default function NotFound() {
 
     let tela = c1.canvas;
     let canvas = c1.context;
-    let particles = [];
+    let particles = useRef([]);
     let frequency = 20;
     let size = 100
     let lineheight = 70;
@@ -32,12 +32,12 @@ export default function NotFound() {
     }
 
 
-    const maskCanvas = () => {
+    const maskCanvas = useCallback(() => {
         c3.context.drawImage(c2.canvas, 0, 0, c2.canvas.width, c2.canvas.height);
         c3.context.globalCompositeOperation = 'source-atop';
         c3.context.drawImage(c1.canvas, 0, 0);
         blur(c1.context, c1.canvas, 2)
-    }
+    }, [c1, c2, c3]);
 
     const blur = (ctx, canvas, amt) => {
         ctx.filter = `blur(${amt}px)`
@@ -50,32 +50,32 @@ export default function NotFound() {
      * const to clear layer canva=> s
      * @num:number number of particles
      */
-    const popolate = () => {
-        particles.push(
+    const popolate = useCallback(() => {
+        particles.current.push(
             new ErrorParticle(canvas, {
                 x: (window.innerWidth / 2),
                 y: (window.innerHeight / 2)
             })
         )
-        return particles.length
-    }
+        return particles.current.length
+    }, [canvas, particles]);
 
-    const clear = () => {
+    const clear = useCallback(() => {
         debugger
         canvas.globalAlpha = 0.03;
         canvas.fillStyle = '#111111';
         canvas.fillRect(0, 0, tela.width, tela.height);
         canvas.globalAlpha = 1;
-    }
+    }, [canvas, tela]);
 
-    const update = () => {
+    const update = useCallback(() => {
         clear();
-        particles = particles.filter(function (p) {
-            return p.move()
-        })
+        // particles.current = particles.current.filter(function (p) {
+        //     return p.move()
+        // })
         maskCanvas()
         requestAnimationFrame(update)
-    }
+    }, [clear, maskCanvas]);
 
 
     useEffect(() => {
@@ -91,7 +91,16 @@ export default function NotFound() {
 
             update();
 
-    }, [])
+        return () => {
+            // Cleanup function when unmounting
+            Object.keys(getListeners).forEach((key) => {
+                const listenerArray = getListeners[key];
+                if (listenerArray) {
+                    listenerArray.length = 0;
+                }
+            });
+        };
+    }, [ c3, c1, c2, frequency, update, popolate, maskCanvas, clear, particles, target]);
 
 
 

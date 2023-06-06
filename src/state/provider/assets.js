@@ -35,13 +35,13 @@ export const AssetProvider = ({ children }) => {
             clearHash();
         };
 
-    }, [debugMode]);
+    }, []);
 
     // Provide the Three.js objects to child components
     return (
-        <DebugModeContext.Provider value={{ debugMode }}>
+        <AssetContext.Provider value={{ debugMode }}>
             {children}
-        </DebugModeContext.Provider>
+        </AssetContext.Provider>
     );
 };
 

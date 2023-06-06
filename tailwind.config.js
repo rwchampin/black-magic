@@ -18,6 +18,9 @@ module.exports = {
     extend: {
       fontFamily: {
         apercu: ['var(--font-apercu)'],
+        apercuMedium: ['var(--font-apercu-medium)'],
+        apercuBold: ['var(--font-apercu-bold)'],
+        montserrat: ['var(--font-montserrat)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

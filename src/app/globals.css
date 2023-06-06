@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+:root {
+  --ch-bg: #E9E9E9;
+}
 :root {
     --color-primary: #222;
     --color-primary-rgb: 34, 34, 34;
@@ -73,6 +75,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  line-height: 100%;
 }
 
 html, body {
@@ -109,7 +112,15 @@ nav {
   background: var(--bg-secondary);
   cursor: move !important;
 }
- 
+ h1 {
+  font-size: 6rem;
+  font-family: var(--font-montserrat);
+  font-weight: 900;
+  color:white;
+  text-shadow: 0 0 10px #000, 0 0 20px #000;
+   /* 0 0 30px #000, 0 0 40px #666, 0 0 70px #666, 0 0 80px #666, 0 0 100px #666, 0 0 150px #222; */ 
+
+ }
 nav li a {
   color: #d3d3d3;
 }

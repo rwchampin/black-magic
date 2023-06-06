@@ -1,7 +1,8 @@
 "use client";
-import { useState, useRef, useEffect, useInsertionEffect } from "react";
+import { useState, useRef, useEffect, useInsertionEffect, useCallback } from "react";
 import { useEventEmitter, } from "@/hooks";
 import * as THREE from 'three';
+import { get } from "http";
 
 
 export default function CustomCursor({ options }) {
@@ -91,7 +92,7 @@ export default function CustomCursor({ options }) {
         return current + (target - current) * ease;
     };
 
-    const easeFN = (current, target, ease) => current + (target - current) * ease;
+    const easeFN = useCallback((current, target, ease) => current + (target - current) * ease, []);
 
     const throttle = (fn, limit) => {
         let inThrottle;
@@ -111,19 +112,22 @@ export default function CustomCursor({ options }) {
     }, []);
 
     useEffect(() => {
+        const x = $.current
+        const xx = $c.current
+        const xxx = $i.current
         const init = () => {
             x.current = lx.current = options.x || window.innerWidth / 2;
             y.current = ly.current = options.y || window.innerHeight / 2;
 
             setColor(color.current, opacity.current);
 
-            $c.current.style.width = `${radius.current}px`;
-            $c.current.style.height = `${radius.current}px`;
-            $c.current.style.borderRadius = `${radius.current}px`;
-            $c.current.style.borderWidth = `${borderWidth.current}px`;
+           xx.style.width = `${radius.current}px`;
+           xx.style.height = `${radius.current}px`;
+           xx.style.borderRadius = `${radius.current}px`;
+           xx.style.borderWidth = `${borderWidth.current}px`;
 
             if (createInnerElement.current) {
-                $i.current.innerHTML = createInnerElement.current();
+                xxx.innerHTML = createInnerElement.current();
             }
 
                 activateCSSVars();
@@ -147,11 +151,11 @@ export default function CustomCursor({ options }) {
 
         return () => {
             handleEventListeners(true);
-            $.current.parentNode.removeChild($.current);
+           x.parentNode.removeChild(x);
         };
-    }, []);
+    }, [setColor, activateCSSVars, emit, options.x, options.y,createInnerElement, handleEventListeners, update, updateStyle]);
 
-    const handleEventListeners = (remove) => {
+    const handleEventListeners = useCallback((remove) => {
         const action = remove ? 'removeEventListener' : 'addEventListener';
 
         window[action]('mousemove', onMove);
@@ -162,7 +166,7 @@ export default function CustomCursor({ options }) {
         window[action]('touchstart', onDown);
         window[action]('mouseup', onUp);
         window[action]('touchend', onUp);
-    };
+    }, [onDown, onMove, onUp]);
 
     const getPixelColor = (x, y) => {
         const pxData = ctx.current.getImageData(x, y, 1, 1);
@@ -193,11 +197,11 @@ export default function CustomCursor({ options }) {
         };
     };
 
-    const isContrastColor = (color) => {
+    const isContrastColor = useCallback((color) => {
         const rgb = hexToRgb(color);
         const yiq = ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000;
         return (yiq >= 128) ? 'black' : 'white';
-    };
+    }, []);
 
     const isDOMElement = (elem) => elem instanceof HTMLElement;
 
@@ -205,7 +209,7 @@ export default function CustomCursor({ options }) {
 
     const isThreeObject = (elem) => elem instanceof THREE.Object3D;
 
-    const getBackgroundColor = (e) => {
+    const getBackgroundColor = useCallback((e) => {
         const target = e.target;
         const elementType = getElementType(target);
 
@@ -222,13 +226,13 @@ export default function CustomCursor({ options }) {
         } else {
             return null;
         }
-    };
+    }, []);
 
-    const handleMagicMouseColor = (e) => {
+    const handleMagicMouseColor = useCallback((e) => {
         const bg = getBackgroundColor(e);
         const color = isContrastColor(bg);
         setColor(color, opacity.current);
-    };
+    }, [  getBackgroundColor, isContrastColor, setColor]);
 
     // const handleEmitListeners = (on = true) => {
     //     const onOrOff = on ? 'add' : 'remove';
@@ -308,26 +312,26 @@ export default function CustomCursor({ options }) {
         $.current.parentNode.removeChild($.current);
     };
 
-    const setColor = (color, opacity) => {
+    const setColor = useCallback((color, opacity) => {
         $c.current.style.backgroundColor = color;
         $.current.style.opacity = opacity;
-    };
+    }, []);
 
     const changeState = (newState) => {
         state.current = newState;
     };
 
-    const onUp = () => { };
-    const onDown = () => { emit('down'); };
+    const onUp = useCallback(() => { }, []);
+    const onDown = useCallback(() => { emit('down'); }, [emit]);
 
-    const onMove = (e) => throttle(() => {
+    const onMove = useCallback((e) => throttle(() => {
         e = e.touches ? e.touches[0] : e;
         x.current = e.clientX;
         y.current = e.clientY;
         console.log("d",x.current,y.current)
         onHover(e);
         handleMagicMouseColor(e);
-    }, 100);
+    }, 100), [onHover, handleMagicMouseColor]);
 
     const onHover = throttle((e) => {
         if (lockemits.current) {
@@ -348,7 +352,7 @@ export default function CustomCursor({ options }) {
         }
     }, 100);
 
-    const update = () => {
+    const update = useCallback(() => {
         requestAnimationFrame(update);
         
         let tx = x.current;
@@ -397,9 +401,9 @@ export default function CustomCursor({ options }) {
        
 
         onUpdate.current();
-    };
+    }, [easeFN, onUpdate]);
 
-    const activateCSSVars = () => {
+    const activateCSSVars = useCallback(() => {
         $.current.style.transform =
             'translate( calc( var(--dx) * -1px ), calc( var(--dy) * -1px ) )' +
             ' translate3d( calc( var(--x) * 1px ), calc( var(--y) * 1px ), 0px )';
@@ -413,10 +417,10 @@ export default function CustomCursor({ options }) {
         $c.current.style.width = 'calc( var(--width) * 1px )';
         $c.current.style.height = 'calc( var(--height) * 1px )';
 
-        onUpdate = updateCSSVars;
-    };
+        onUpdate.current = updateCSSVars;
+    }, [updateCSSVars]);
 
-    const updateCSSVars = () => {
+    const updateCSSVars =useCallback(() => {
         $.current.style.setProperty('--width', width.current);
         $.current.style.setProperty('--height', height.current);
         $.current.style.setProperty('--x', x.current);
@@ -426,9 +430,9 @@ export default function CustomCursor({ options }) {
         $.current.style.setProperty('--dx', dx.current);
         $.current.style.setProperty('--dy', dy.current);
         $.current.style.setProperty('--rotation', rotation.current);
-    };
+    }, []);
 
-    const updateStyle = () => {
+    const updateStyle = useCallback(() => {
         $.current.style.transform = `translate3d(${x.current + (dx.current * -1)}px, ${y.current + (dy.current * -1)}px, 0px)`;
 
         $c.current.style.transform =
@@ -440,7 +444,7 @@ export default function CustomCursor({ options }) {
 
         $c.current.style.width = `${width.current}px`;
         $c.current.style.height = `${height.current}px`;
-    };
+    }, []);
 
     const lock = (x, y, w, h) => {
         if (x !== undefined) {

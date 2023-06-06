@@ -30,7 +30,7 @@ export const CoreProvider = ({ children }) => {
             clearHash();
         };
 
-    }, [Core]);
+    }, []);
 
     // Provide the Three.js objects to child components
     return (

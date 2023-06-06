@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { OrthographicCamera, Plane, Sphere } from '@react-three/drei';
+import { PerspectiveCamera, Plane, Sphere } from '@react-three/drei';
 import { useSpring } from "@react-spring/core";
 import * as THREE from 'three';
 
@@ -11,16 +11,16 @@ export const Ryan = () => {
     const { viewport, scene, gl, mouse } = useThree();
     const { camera } = useThree();
     const raycaster = useRef(new THREE.Raycaster());
- 
+    raycaster.current.params.Points.threshold = 0.7
     useEffect(() => {
 
         camera.position.z = 3
-    }, [])
+    }, [camera.position])
 
     useFrame(() => {
         // if (active) {
         raycaster.current.setFromCamera(mouse, camera); // Replace { x: 0, y: 0 } with your mouse coordinates
-        const intersects = raycaster.current.intersectObjects([plane.current]);
+        const intersects = raycaster.current.intersectObjects([scene.children[5]], true);
 
         if (intersects.length > 0) {
             // Handle intersection
@@ -38,7 +38,7 @@ export const Ryan = () => {
 
     return (
         <>
-           <OrthographicCamera
+           {/* <OrthographicCamera
         makeDefault
         zoom={1}
         top={viewport.height / 2}
@@ -48,13 +48,20 @@ export const Ryan = () => {
         near={.1}
         far={1000}
         position={[0, 0, 3]}
-      />
-            <Sphere ref={follower} args={[.1, 16, 16]} position={[0,0,0]}>
+      /> */}
+      <PerspectiveCamera
+        makeDefault
+        fov={50}
+        near={.1}
+        far={1000}
+        position={[0, 0, 0]}
+        />
+            <Sphere ref={follower} args={[.1, 16, 16]} position={[0,0,30]}>
                 <meshBasicMaterial attach="material" color="blue" />
                 <spotLight castShadow color={0x00ff00} ref={light} intensity={1} position={[0, 0, 0]} />
             </Sphere>
             <Plane receiveShadow ref={plane} args={[10, 10]} side={THREE.DoubleSide} position={[0, 0,0]}>
-                <meshBasicMaterial attach="material" side={THREE.DoubleSide} color="red" />
+                <meshBasicMaterial attach="material" side={THREE.DoubleSide} color="transparent" />
             </Plane>
         </>
     )

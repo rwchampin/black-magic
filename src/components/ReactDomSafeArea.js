@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './styles.scss'
 
-export const ReactDomSafeArea<React.FN = ({ children }) => {
+export const ReactDomSafeArea = ({ children }) => {
   const containerRef = React.useRef(null);
   React.useEffect(() => {
     if (

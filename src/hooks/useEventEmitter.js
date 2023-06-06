@@ -59,7 +59,7 @@ const useEventEmitter = () => {
       });
 
     };
-  }, []);
+  }, [ getListeners ]);
 
   return { on, has, off, emit };
 };
