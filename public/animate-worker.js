@@ -49,7 +49,7 @@ self.onmessage = function (event) {
   
   function animate(vectors, windowDimensions) {
     function update() {
-      for (let i = 0; i < vectors.length; i++) {
+      for (let i = 0; i < points.length/3; i++) {
         const vector = vectors[i];
   
         // Update the position using linear interpolation (lerp)

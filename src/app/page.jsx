@@ -1,13 +1,13 @@
 "use client"
-import { Title, Navigation } from '@/components'
+import { Title, CurlTubes } from '@/components'
 import dynamic from 'next/dynamic';
-
+import  {Navigation}  from '@/components';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { useEffect, useRef, useMemo, useCallback } from 'react';
 import * as THREE from 'three';
 
-export default function Page() {
+export default function Page(params) {debugger
   const vectors = useRef([]);
   const count = 10000;
   const positions = useMemo(() => new Float32Array(count * 3), [count]);
@@ -83,13 +83,10 @@ export default function Page() {
     pointsRef.current.geometry.attributes.previousPosition.needsUpdate = true;
   });
 
-  const DynamicNavigation = dynamic(() => import('@/components/Navigation.js'), {
-    ssr: false,
-  });
+ 
   return (
-    <>
-      {/* <Title>Ryan The Developer</Title> */}
-      {/* <DynamicNavigation />  */}
+
+      <group>
     <PerspectiveCamera makeDefault position={[0, 0, 5]} 
     fov={75}
     aspect={2}
@@ -160,8 +157,8 @@ void main() {
             vertexColors={false}
           />
         </points>
-            <DynamicNavigation />
-    </>
+            <CurlTubes />
+            </group>
   );
 }
 

@@ -1,7 +1,7 @@
 import { Button } from './Button';
 import CustomCursor from './CustomCursor';
 import { JellyLogo } from './JellyLogo';
-
+import Nav from './Nav';
 import { Title } from './Title';
 import { Logo } from './Logo';
 import { CanvasManager } from './CanvasManager';
@@ -11,9 +11,10 @@ import { DarkInsetLogo } from './DarkInsetLogo';
 import { SafeArea } from './SafeArea/index.tsx';
 import  TLight  from './TLight';
 import { ParticlesRise } from './ParticlesRise';
+import { CurlTubes } from './CurlTubes';
 export {
     ParticlesRise,
-
+    CurlTubes,
     TLight,
     Title,
     SafeArea,
@@ -22,7 +23,7 @@ export {
     Button,
     CustomCursor,
     JellyLogo,
-
+    Nav,
     ToTop,
     CanvasManager
 };

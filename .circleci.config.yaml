@@ -1,0 +1,31 @@
+version: 2.1
+
+orbs:
+  aws-ec2: circleci/aws-ec2@0.4.1
+
+jobs:
+  deploy:
+    docker:
+      - image: circleci/node:14
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install AWS CLI
+          command: |
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+      - aws-ec2/setup-ssh:
+          user: ec2-user
+          region: <your_aws_region>
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+          ssh-forwarding: true
+
+      - run:
+          name: Deploy to EC2
+          command: |
+            ssh ec2-user@<your_ec2_instance_ip> "cd /path/to/project && git pull && npm install && npm run build && sudo systemctl restart <service_name>"

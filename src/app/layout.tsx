@@ -1,9 +1,9 @@
 "use client";
 import { useEffect } from "react";
 import "./globals.css";
-
+import Nav from "@/components/Nav";
 import { Canvas } from "@react-three/fiber";
-import { SafeArea } from "@/components";
+import { SafeArea,  } from "@/components";
 import localFont from "next/font/local";
 
 
@@ -39,11 +39,8 @@ const montserat = localFont({
 
 
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children}: { children: React.ReactNode }) {
+
   return (
     <html className="antialiased" lang="en">
       <head>
@@ -51,7 +48,7 @@ export default function RootLayout({
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         </head>
       <body className={`antialiased`}>
-        <SafeArea><Canvas camera={{ position: [0, 0, 0], fov: 65 }} >{children}</Canvas></SafeArea>
+        <SafeArea><Nav /><Canvas camera={{ position: [0, 0, 0], fov: 65 }} >  {children}</Canvas></SafeArea>
       </body>
     </html>
   );
