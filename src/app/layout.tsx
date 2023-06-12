@@ -48,7 +48,7 @@ export default function RootLayout({ children}: { children: React.ReactNode }) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         </head>
       <body className={`antialiased`}>
-        <SafeArea><Nav /><Canvas camera={{ position: [0, 0, 0], fov: 65 }} >  {children}</Canvas></SafeArea>
+        <SafeArea><Nav />  {children}</SafeArea>
       </body>
     </html>
   );

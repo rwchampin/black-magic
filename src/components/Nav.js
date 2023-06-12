@@ -59,10 +59,10 @@ export default function Nav() {
     return (
         <section className="nav-wrapper fixed bottom-20 w-full flex justify-between">
             {/* <ToTop classcName="flex-none basis-2/12" /> */}
-            <nav ref={nav} className="nav flex auto hover:drop-shadow-md rounded text-white p-5">
-                <div className="flex relative">
-                    <Image src="/logo.png" alt="logo" fill  className='logo'/>
-                    <ul className="flex gap-10">
+            <nav ref={nav} className="nav flex auto hover:drop-shadow-md rounded text-white p-3">
+                <div className="flex relative items-center gap-4">
+                    <Image src="https://ryan-the-developer-assets.s3.amazonaws.com/logo-black-outline-white-fill.png" alt="logo" fill  className='logo'/>
+                    <ul className="flex gap-10 p-1 items-center">
 
 
                         {navItems.current.map((link, index) => (

@@ -7,7 +7,7 @@ import { Logo } from './Logo';
 import { CanvasManager } from './CanvasManager';
 import { ToTop } from './ToTop';
 import { DarkInsetLogo } from './DarkInsetLogo';
-
+import Points from './Points';
 import { SafeArea } from './SafeArea/index.tsx';
 import  TLight  from './TLight';
 import { ParticlesRise } from './ParticlesRise';
@@ -24,6 +24,7 @@ export {
     CustomCursor,
     JellyLogo,
     Nav,
+    Points,
     ToTop,
     CanvasManager
 };

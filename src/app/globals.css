@@ -93,6 +93,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+
 }
 .page {
   min-height: 100%;
@@ -111,16 +112,29 @@ canvas {
 
 .nav-wrapper {
   z-index: 100;
+
 }
 nav {
   background: var(--bg-secondary);
   cursor: move !important;
 }
-
 nav .logo {
-  width: 100px;
+  width: 70px !important;
   height: auto;
-  padding: 10px;
+  position: relative !important;
+  padding-right: 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.safe-area {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-logo {
+  width: 30% !important;
+  height: auto !important;
+  position: relative !important;
 }
 h1 {
   font-size: 6rem;

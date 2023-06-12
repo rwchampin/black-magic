@@ -2,6 +2,8 @@
 import * as THREE from 'three';
 import { useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
+import fragment from "@/shaders/tubes/fragment.glsl";
+import vertex from "@/shaders/tubes/vertex.glsl";
 
 const Tube = (props) => {
     const mesh = useRef();
@@ -13,28 +15,8 @@ const Tube = (props) => {
             time: { value: 0 },
             resolution: { value: new THREE.Vector4() },
         },
-        vertexShader: `
-        varying vec2 vUv;
-        varying vec3 vPosition;
-        varying vec3 vNormal;
-        void main() {
-            vUv = uv;
-            vPosition = position;
-            vNormal = normal;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); 
-        }
-        `,
-        fragmentShader: `
-        varying vec2 vUv;
-        varying vec3 vPosition;
-        varying vec3 vNormal;
-        uniform float time;
-        uniform vec4 resolution;
-        void main() {
-            vec2 uv = vUv;
-            gl_FragColor = vec4(vUv.x, 0.,0., 1.0);
-        }
-        `,
+        vertexShader: vertex,
+        fragmentShader: fragment,
     });
     return (
         <mesh ref={mesh} {...props}>
@@ -95,7 +77,7 @@ export const CurlTubes = () => {
         gl.setClearColor("#000000");
         gl.setClearAlpha(1);
         scene.background = "#000000";
-        scene.fog = new THREE.Fog("0xff0000", .10, 1000);
+        scene.fog = new THREE.Fog("0x88080b", .10, 1000);
     
       }, [gl, scene])
     useEffect(() => {
